@@ -1,3 +1,6 @@
+// required in order to use fs module
+const fs = require('fs');
+
 // holds user command-line arguements
 const profileDataArgs = process.argv.slice(2, process.argv.length);
 // console.log(profileDataArgs);
@@ -37,5 +40,9 @@ const generatePage = (name, github) => {
     `;
 };
 
-console.log(name, github);
-console.log(generatePage(name, github));
+// use fs.writeFile() function to create html
+fs.writeFile('index.html', generatePage(name, github), err => {
+    if (err) throw err;
+
+    console.log('Portfolio complete! Check out index.html to see the output!');
+});
