@@ -11,13 +11,12 @@ const questions = [
 
 // function to write README file
 function writeToFile(fileName, data) {
+    fs.writeFile('readme.md', generateMarkdown(fileName, data), err => {
+        if (err) throw err;
+
+        console.log('ReadMe.md complete!');
+    });
 }
-
-fs.writeFile('readme.md', generateMarkdown(data), err => {
-    if (err) throw err;
-
-    console.log('ReadMe complete! Checkout ReadMe.md to see the output.');
-});
 
 // function to initialize program
 function init() {
