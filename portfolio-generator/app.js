@@ -4,6 +4,8 @@ const fs = require('fs');
 // use inquirer
 const inquirer = require('inquirer');
 
+console.log(inquirer);
+
 // link to page-template.js
 const generatePage = require('./src/page-template.js');
 
