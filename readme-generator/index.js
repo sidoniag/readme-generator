@@ -1,7 +1,6 @@
-// use fs module
 const fs = require('fs');
+// require inquire
 
-// link to generatemarkdown.js
 const generateMarkdown = require('./utils/generateMarkdown');
 
 // array of questions for user
