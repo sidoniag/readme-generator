@@ -8,22 +8,54 @@ const promptUser = () => {
         {
             type: 'input',
             name: 'github',
-            message: 'Enter your GitHub Username'
+            message: 'Enter your GitHub Username? (Required)',
+            validate: githubInput => {
+                if (githubInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your username!');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'email',
-            message: 'Enter your email address'
+            message: 'Enter your email address. (Required)',
+            validate: emailInput => {
+                if (emailInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your email address!');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'project',
-            message: 'Enter your project name'
+            message: 'Enter your project name. (Required)',
+            validate: projectInput => {
+                if (projectInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your project name!');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'description',
-            message: 'Enter a description about the project'
+            message: 'Enter a description about the project. (Required)',
+            validate: descriptionInput => {
+                if (descriptionInput) {
+                    return true;
+                } else {
+                    console.log('Please enter a project description!');
+                    return false;
+                }
+            }
         },
         {
             type: 'list',
@@ -44,7 +76,7 @@ const promptUser = () => {
         {
             type: 'input',
             name: 'install',
-            message: 'What comman should be run to install dependencies?',
+            message: 'What command should be run to install dependencies?',
             default: 'npm i'
         },
         {
@@ -54,9 +86,7 @@ const promptUser = () => {
         }
     ]);
 };    
-    promptUser().then(answers => console.log(answers));
 
-// ];
 
 // function to write README file
 function writeToFile(fileName, data) {
@@ -65,6 +95,9 @@ function writeToFile(fileName, data) {
         console.log('ReadMe.md complete!');
     });
 }
+
+promptUser()
+    .then(answers => console.log(answers));
 
 // function to initialize program
 function init() {
