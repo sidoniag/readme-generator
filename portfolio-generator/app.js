@@ -7,11 +7,11 @@ const inquirer = require('inquirer');
 // link to page-template.js
 const generatePage = require('./src/page-template');
 
-// holds user command-line arguments
-const profileDataArgs = process.argv.slice(2, process.argv.length);
+// // holds user command-line arguments
+// const profileDataArgs = process.argv.slice(2, process.argv.length);
 
-// extract arguments and store them in distinct variables
-const [name, github] = profileDataArgs;
+// // extract arguments and store them in distinct variables
+// const [name, github] = profileDataArgs;
 
 // questions
 const promptUser = () => {
@@ -136,17 +136,28 @@ const promptProject = portfolioData => {
       });
   };
 
-//   // use template data
-//   const pageHTML = generatePage(mockData);
-
   promptUser()
     .then(promptProject)
     .then(portfolioData => {
-        const pageHTML = generatePage(portfolioData);
-
-    fs.writeFile('index.html', generatePage(name, github), err => {
-        if (err) throw err;
-
-        console.log('Portfolio complete! Check out index.html to see the output!');
+        return generatePage(portfolioData);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+        return copyFile();
+    })
+    .then(copyFileResponse => {
+        console.log(copyFileResponse);
+    })
+    .catch(err => {
+        console.log(err);
     });
-});
+
+//     fs.writeFile('index.html', generatePage(name, github), err => {
+//         if (err) throw err;
+
+//         console.log('Portfolio complete! Check out index.html to see the output!');
+//     });
+// });
