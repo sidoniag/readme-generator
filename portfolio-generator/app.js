@@ -1,9 +1,7 @@
-// required in order to use fs module
-const fs = require('fs');
-
 // use inquirer
 const inquirer = require('inquirer');
-
+// required in order to use fs module
+const { writeFile, copyFile } = require('./utils/generate-site');
 // link to page-template.js
 const generatePage = require('./src/page-template');
 
@@ -72,8 +70,8 @@ const promptProject = portfolioData => {
         type: 'input',
         name: 'name',
         message: 'What is the name of your project? (Required)',
-        validate: nameInput => {
-            if (nameInput) {
+        validate: projectnameInput => {
+            if (projectnameInput) {
                 return true;
             } else {
                 console.log('Please enter your project name!');
@@ -155,9 +153,18 @@ const promptProject = portfolioData => {
         console.log(err);
     });
 
-//     fs.writeFile('index.html', generatePage(name, github), err => {
-//         if (err) throw err;
-
-//         console.log('Portfolio complete! Check out index.html to see the output!');
-//     });
-// });
+    // fs.writeFile('./dist/index.html', pageHTML, err => {
+    //     if (err) {
+    //       console.log(err);
+    //       return;
+    //     }
+    //     console.log('Page created! Check out index.html in this directory to see it!');
+      
+    //     fs.copyFile('./src/style.css', './dist/style.css', err => {
+    //       if (err) {
+    //         console.log(err);
+    //         return;
+    //       }
+    //       console.log('Style sheet copied successfully!');
+    //     });
+    //   });
